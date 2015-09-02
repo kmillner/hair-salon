@@ -1,0 +1,21 @@
+body {
+  font-family: 'Times', serif;
+}
+
+.jumbotron {
+  background-image: url("/img/bg.png");
+}
+
+h1 {
+  font-family: 'Georgia', serif;
+  font-color: #FF6699;
+}
+
+
+.li.cat {
+background: url("/img/icon.gif") no-repeat left top;
+height: 54px;
+padding-left: 44px;
+padding-top: 3px;
+}
+}
