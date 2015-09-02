@@ -2,7 +2,7 @@
 
 ##### _{Brief description of application}, {Date of current version}_
 
-#### By **Molly Waggett**
+#### By **Kallen Millner**
 
 ## Description
 
@@ -42,7 +42,7 @@
 
 ### Legal
 
-Copyright (c) 2015 **Molly Waggett**
+Copyright (c) 2015 **Kallen Millner**
 
 This software is licensed under the MIT license.
 
