@@ -30,23 +30,23 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: courses; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: clients; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE courses (
+CREATE TABLE clients (
     id integer NOT NULL,
     name character varying,
-    course_number character varying
+    stylist_id integer
 );
 
 
-ALTER TABLE courses OWNER TO "Guest";
+ALTER TABLE clients OWNER TO "Guest";
 
 --
--- Name: courses_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
-CREATE SEQUENCE courses_id_seq
+CREATE SEQUENCE clients_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -54,48 +54,33 @@ CREATE SEQUENCE courses_id_seq
     CACHE 1;
 
 
-ALTER TABLE courses_id_seq OWNER TO "Guest";
+ALTER TABLE clients_id_seq OWNER TO "Guest";
 
 --
--- Name: courses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE courses_id_seq OWNED BY courses.id;
+ALTER SEQUENCE clients_id_seq OWNED BY clients.id;
 
 
 --
--- Name: students; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: stylists; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE students (
+CREATE TABLE stylists (
     id integer NOT NULL,
     name character varying,
-    enrollment_year integer,
-    enrollment_month integer,
-    enrollment_day integer
+    service character varying
 );
 
 
-ALTER TABLE students OWNER TO "Guest";
+ALTER TABLE stylists OWNER TO "Guest";
 
 --
--- Name: students_courses; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: stylists_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
-CREATE TABLE students_courses (
-    id integer NOT NULL,
-    student_id integer,
-    course_id integer
-);
-
-
-ALTER TABLE students_courses OWNER TO "Guest";
-
---
--- Name: students_courses_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
---
-
-CREATE SEQUENCE students_courses_id_seq
+CREATE SEQUENCE stylists_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -103,130 +88,73 @@ CREATE SEQUENCE students_courses_id_seq
     CACHE 1;
 
 
-ALTER TABLE students_courses_id_seq OWNER TO "Guest";
+ALTER TABLE stylists_id_seq OWNER TO "Guest";
 
 --
--- Name: students_courses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: stylists_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE students_courses_id_seq OWNED BY students_courses.id;
-
-
---
--- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
---
-
-CREATE SEQUENCE students_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE students_id_seq OWNER TO "Guest";
-
---
--- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
---
-
-ALTER SEQUENCE students_id_seq OWNED BY students.id;
+ALTER SEQUENCE stylists_id_seq OWNED BY stylists.id;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY courses ALTER COLUMN id SET DEFAULT nextval('courses_id_seq'::regclass);
+ALTER TABLE ONLY clients ALTER COLUMN id SET DEFAULT nextval('clients_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY students ALTER COLUMN id SET DEFAULT nextval('students_id_seq'::regclass);
+ALTER TABLE ONLY stylists ALTER COLUMN id SET DEFAULT nextval('stylists_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY students_courses ALTER COLUMN id SET DEFAULT nextval('students_courses_id_seq'::regclass);
-
-
---
--- Data for Name: courses; Type: TABLE DATA; Schema: public; Owner: Guest
---
-
-COPY courses (id, name, course_number) FROM stdin;
-7	La La La	SING101
-5	Learn to Food	FOOD101
+COPY clients (id, name, stylist_id) FROM stdin;
 \.
 
 
 --
--- Name: courses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('courses_id_seq', 8, true);
+SELECT pg_catalog.setval('clients_id_seq', 1, false);
 
 
 --
--- Data for Name: students; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: stylists; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY students (id, name, enrollment_year, enrollment_month, enrollment_day) FROM stdin;
-3	Pumpking	2015	6	8
-4	Skeletor	2020	10	31
+COPY stylists (id, name, service) FROM stdin;
 \.
 
 
 --
--- Data for Name: students_courses; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-COPY students_courses (id, student_id, course_id) FROM stdin;
-9	3	5
-10	4	7
-\.
+SELECT pg_catalog.setval('stylists_id_seq', 1, false);
 
 
 --
--- Name: students_courses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: clients_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-SELECT pg_catalog.setval('students_courses_id_seq', 10, true);
-
-
---
--- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
---
-
-SELECT pg_catalog.setval('students_id_seq', 4, true);
+ALTER TABLE ONLY clients
+    ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
 
 
 --
--- Name: courses_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: stylists_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY courses
-    ADD CONSTRAINT courses_pkey PRIMARY KEY (id);
-
-
---
--- Name: students_courses_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
---
-
-ALTER TABLE ONLY students_courses
-    ADD CONSTRAINT students_courses_pkey PRIMARY KEY (id);
-
-
---
--- Name: students_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
---
-
-ALTER TABLE ONLY students
-    ADD CONSTRAINT students_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY stylists
+    ADD CONSTRAINT stylists_pkey PRIMARY KEY (id);
 
 
 --

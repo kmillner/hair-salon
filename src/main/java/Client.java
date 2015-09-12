@@ -20,7 +20,7 @@ public class Client {
   public int getStylistId() {
     return stylist_id;
   }
-  
+
   public int getId() {
     return id;
   }
@@ -67,7 +67,7 @@ public class Client {
         .addParameter("id", id)
         .executeUpdate();
     }
-  }  
+  }
 
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
@@ -104,18 +104,8 @@ public class Client {
       String sql = "INSERT INTO Clients_Stylists (Client_id, Stylist_id) VALUES (:Client_id, :Stylist_id)";
       con.createQuery(sql)
         .addParameter("Client_id", id)
-        .addParameter("Stylist_id", Stylist.getId())
+        .addParameter("Stylist_id", id)
         .executeUpdate();
-    }
-  }
-
-  public List<Stylist> getStylists() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT Stylists.* FROM Clients JOIN Clients_Stylists ON (Clients.id = Clients_Stylists.Client_id) JOIN Stylists ON (Clients_Stylists.Stylist_id = Stylists.id) WHERE Clients.id = :id";
-      List<Stylist> Stylists = con.createQuery(sql)
-          .addParameter("id", id)
-          .executeAndFetch(Stylist.class);
-      return stylists;
     }
   }
 

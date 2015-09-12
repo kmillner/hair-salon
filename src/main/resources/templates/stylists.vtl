@@ -1,0 +1,31 @@
+
+    <p> Name: $stylist.getName() </p>
+    <p> Services Offered: $stylist.getService() </p>
+
+<form action="/stylists/$stylist.getId()/update">
+  <button type="submit" class="btn btn-default btn-xs" aria-label="Left Align">
+    <span class="glyphicon glyphicon-edit" aria-hidden="true">
+    </span>
+    Edit
+  </button>
+</form>
+</div>
+<br>
+$stylist.getName() clientele includes:
+#if ($clients)
+  #foreach ($client in $clients)
+    <ul>
+      <li class="custom_list">
+        $client.getName()
+        <form action="/stylists/$client.getId()/stylists/$stylist.getId()/delete">
+        <button type="submit" class="btn btn-default btn-xs" aria-label="Left Align">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true">
+          </span>
+          Delete
+        </button>
+      </form>
+    </li>
+  </ul>
+  <hr>
+  #end
+#end

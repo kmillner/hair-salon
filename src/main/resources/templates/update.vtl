@@ -1,0 +1,18 @@
+Need to make some changes to the Stylist?
+<form action = "/stylists/$stylist.getId()/update" method="get">
+  <div class="form-group">
+    <label for="name">Stylist name</label>
+    <input id="name" name="name" placeholder="$stylist.getName()" type="text">
+  </div>
+
+  <div class="form-group">
+    <label for="services">Services Offered</label>
+    <input id="services"placeholder="$stylist.getService()" name="services" type="text">
+  </div>
+
+  <div class="form-group">
+    <label for="rate">Stylist Rate</label>
+    <input id="rate" placeholder="$stylist.getRate()" name="rate" type="text">
+  </div>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

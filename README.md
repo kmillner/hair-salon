@@ -1,21 +1,21 @@
-# Application Name
+# Animal Salon App
 
-##### _{Brief description of application}, {Date of current version}_
+##### _{Sept 2015}_
 
 #### By **Kallen Millner**
 
 ## Description
 
-{This is a detailed description of your application. Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. Do you want other developers to use this code in their apps? Talk about things like that here in simple terms.}
+{Create an app where you can insert stylists and clients and add clients to a certain stylist}
 
 ## Setup
 
 * Set up the database in PostgreSQL by running the following commands in your terminal:
 ```
   psql
-  CREATE DATABASE database_name;
+  CREATE DATABASE hair_salon;
   \c database_name;
-  CREATE TABLE table_name (id serial PRIMARY KEY, attribute varchar);
+ then go to terminal and type in pg_dump hair_salon > hair_salon.sql
 ```
 * If you wish to run tests, create a test database:
 ```

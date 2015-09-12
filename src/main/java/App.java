@@ -31,13 +31,11 @@ public class App {
 
       String name = request.queryParams("name");
       int stylist_id = Integer.parseInt(request.queryParams("stylist_id"));
-      CLient newClient = new Client(name, stylist_id);
+      Client newClient = new Client(name, stylist_id);
 
       newClient.save();
 
-      //Category.find(category_id).addTask(newTask);
       model.put("client", newClient);
-      //model.put("tasks", Task.all());
       model.put("template", "templates/index.vtl");
       response.redirect("/");
       return null;
@@ -48,15 +46,12 @@ public class App {
 
       String name = request.queryParams("name");
       String services = request.queryParams("services");
-      int rate = Integer.parseInt(request.queryParams("rate"));
 
-
-      Stylist newStylist = new Stylist(name, services, rate);
+      Stylist newStylist = new Stylist(name, services);
 
       newStylist.save();
 
       model.put("stylist", newStylist);
-      //model.put("tasks", Task.all());
       model.put("template", "templates/index.vtl");
       response.redirect("/");
       return null;
@@ -66,38 +61,28 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params("id"));
       Stylist stylist = Stylist.find(id);
+      Client client = Client.find(id);
 
       model.put("stylist", stylist);
-      model.put("clients", clients);
+      model.put("client", client);
       model.put("template", "templates/stylists.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/stylists/:category_id/tasks/:task_id/delete", (request, response) -> {
+    post("/stylists/:client_id/stylists/:stylist_id/delete", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
 
-      int catId = Integer.parseInt(request.params(":category_id"));
-      Category myCategory = Category.find(catId);
+      int clientId = Integer.parseInt(request.params(":client_id"));
+      Client myClient = Client.find(clientId);
 
-      int taskId = Integer.parseInt(request.params(":task_id"));
-      Task taskToDelete = Task.find(taskId);
+      int stylistId = Integer.parseInt(request.params(":stylist_id"));
+      Stylist stylistToDelete = Stylist.find(stylistId);
 
-      taskToDelete.delete();
+      stylistToDelete.delete();
 
-      response.redirect("/stylists/" + request.params(":category_id"));
+      response.redirect("/stylists/" + request.params(":client_id"));
       return null;
     });
-
-    post("/stylists/:id/delete", (request, response) -> {
-      HashMap<String, Object> model = new HashMap<String, Object>();
-
-      Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
-
-      category.delete();
-      response.redirect("/");
-      return null;
-    });
-
 
   }
 }

@@ -32,7 +32,7 @@ public class Stylist {
     } else {
       Stylist newStylistInstance = (Stylist) otherStylistInstance;
       return this.getName().equals(newStylistInstance.getName()) &&
-             this.getStylistNumber().equals(newStylistInstance.getService()) &&
+             this.getService().equals(newStylistInstance.getService()) &&
              this.getId() == newStylistInstance.getId();
     }
   }

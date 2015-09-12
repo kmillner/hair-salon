@@ -1,1 +1,48 @@
 <h4><center>Come Get Your Pet Done at the Salon!</h4></center>
+
+<form action = "/stylists" method="post">
+  <div class="form-group">
+    <label for="name">Stylist name</label>
+    <input id="name" name="name" type="text">
+  </div>
+  <div class="form-group">
+    <label for="service">Service</label>
+    <input id="service" name="service" type="text">
+  </div>
+  <button type="submit" class="btn btn-success">Add Stylist</button>
+</form>
+
+  <form action="/clients" method="post">
+    <label for="stylist_id">Select a Stylist</label>
+    <select id='stylist_id' name='stylist_id' type='text'>
+      #foreach($stylist in $stylists)
+      <option name="stylist_id" value="$stylist.getId()">$stylist.getName()</option>
+      #end
+    </select>
+    <button type="submit" class="btn btn-success">Submit</button>
+  <div class="form-group">
+    <label for="name">Name</label>
+  <input id="name" name="name" type="text" class="form-control">
+  </div>
+<button type="submit" class="btn btn-success">Add Client</button>
+</form>
+#if($stylists)
+<h4>View Stylist Information:</h4>
+#foreach($stylist in $stylists)
+  <ul>
+    <li><a href="/stylists/$stylist.getId() ">$stylist.getName()</a></li>
+    <li>
+      <form action="/stylists/$client.getId()/stylists/$stylist.getId()/delete">
+        <button type="submit" class="btn btn-default btn-xs" aria-label="Left Align">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true">
+          </span>
+          Delete
+        </button>
+      </form>
+    </li>
+  </ul>
+<hr>
+  #end
+  #else
+  <p>There are no stylists yet!</p>
+  #end
